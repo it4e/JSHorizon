@@ -1,0 +1,119 @@
+# JSHorizon
+A tiny Javascript library used for creating horizontal-scrolling websites
+
+## What is JSHorizon?
+JSHorizon is a tiny library written in pure Javascript to assist you in creating fresh and responsive horizontal-scrolling websites. JSHorizon provides you with easy to use functions to calculate and to automatically scale the page width to perfectly fit the containing elements.
+
+The problem with creating horizontal websites is that all of the browsers are predefined to automatically autowrap every element to a new row as soon as they hit the right corner of the viewport. It is neither very flexible nor easy to calculate and hardcode the page width yourself, since you need to do this for every element you add. With JSHorizon this is taken care of for you and you can add elements freely, without having to think about manipulating any page values.
+
+## How does it work?
+JSHorizon uses a simple algorithm to calculate the width of all elements contained inside of the container of your choosing. Using the calculated width of the elements and the viewport width, a ratio is determined and used to set the correct page width.
+
+## How do I use it?
+
+First you will want to include the file '*jshorizon.js*' in your HTML document. You can download the file straight here from Github.
+
+```html
+<script src="jshorizon.js"></script>
+```
+
+JSHorzion is based on a class called '*Horzion*', so you will need to create an object of that class.
+
+```javascript
+// Syntax: Horizon = function(container), where element should be equal to a container of your choosing
+// Here we use the standard <body> element as container
+
+var container = document.getElementByTagName("BODY")[0];
+var horizontal = new Horizon(container);
+```
+
+To automatically calculate the width of the page you shall use the '*Horizon.calc_width()*' function, taking no arguments.
+```javascript
+var horizontal = new Horizon(container);
+
+// Calculate page width
+horizontal.calc_width();
+```
+
+If there is an element inside of the container which has a width that you would not like to be counted, you can add an exception using the '*Horizon.add_excepiton(element)*' function.
+
+Container
+
+```html
+<body>
+  <div id="hidden">
+    I do not want this width to count
+  </div>
+  <header>
+    Swimming
+  </header>
+  <section>
+    Tomorrow I want to go swimming.
+  </section>
+</body>
+```
+
+Do not count the #hidden element's width
+
+```javascript
+var horizontal = new Horizon(container);
+
+horizontal.add_exception(document.getElementById("hidden"));
+
+// Calculate page width
+horizontal.calc_width();
+```
+
+Only the width of the header and the section elements will now be used in calculating the width of the page.
+
+### Examples
+
+index.html - Note that we are using the unit vw in the CSS code (http://www.w3schools.com/cssref/css_units.asp)
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <META charset="UTF-8" />
+        <META name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style type="text/css">
+          html, body {height: 100%;}
+          * {box-sizing: border-box;}
+          header {width: 20vw; height: 100%; position: absolute; top: 0;}
+          section {width: 100vw; height: 100%; float: left;}
+        </style>
+        <script src="jshorizon.js"></script>
+   </head>
+   <body>
+        <header id="menu" style="background: rgba(0, 0, 0, 0.8);">
+          <ul>
+            <li>Home</li>
+          </ul>
+        </header>
+        <section style="background: red;">
+          This is section 1
+        </section>
+        <section style="background:green;">
+          This is section 2
+        </section>
+        <section style="background: blue;">
+          This is section 3
+        </section>
+    </body>
+    <script src="horizontal.js"></script>
+</html>
+```
+
+horizontal.js
+```javascript
+// Define Horizon object. Use <body> as container
+var horizon = new Horizon(document.getElementsByTagName("BODY")[0]);
+
+// Remove #menu from width calculation
+horizon.add_exception(document.getElementById("menu"));
+
+// Calculate page width
+horizon.calc_width();
+```
+
+
