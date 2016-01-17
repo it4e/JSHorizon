@@ -27,7 +27,8 @@ var container = document.getElementByTagName("BODY")[0];
 var horizontal = new Horizon(container);
 ```
 
-To automatically calculate the width of the page you shall use the '*Horizon.calc_width()*' function, taking no arguments.
+To automatically calculate the width of the page you shall use the '*Horizon.calc_width(mobile = false)*' function, taking a single argument whether to call of the calculation if the device is mobile-size.
+
 ```javascript
 var horizontal = new Horizon(container);
 
@@ -65,6 +66,21 @@ horizontal.calc_width();
 ```
 
 Only the width of the header and the section elements will now be used in calculating the width of the page.
+
+## Responsive websites
+
+When it comes to creating repsonsive websites, more specifically mobile adapted sites, having a horizontal-scrolling experience may not be very pleasing at all. Therefore JSHorizon provides you with the option to turn off width calculation when the device is in mobile mode (under 768px standard, but can be changed manually using the function '*Horizon.set_mobile_breakpoint(breakpoint)*'). This can be done directly within the *Horizon.calc_width(mobile = false)* function, or using the function '*Horizon.set_mobile(state = false)*'.
+
+```javascript
+var horizontal = new Horizon(document.getElementById("container"));
+
+// Turn off mobile width calculation
+horizontal.set_mobile(true);
+
+/* or */
+
+horizontal.calc_width(true);
+```
 
 ### Examples
 

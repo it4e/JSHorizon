@@ -11,6 +11,13 @@ var Horizon = function(container) {
     this.container = container;
     this.container_width = 0;
     this.exceptions = new Array();
+    this.mobile_bp = 768;
+    this.mobile_state = false;
+}
+
+// Set custom mobile breakpoint for responsiveness, standard = 768
+Horizon.prototype.set_mobile_breakpoint = function(breakpoint) {
+    this.mobile_bp = breakpoint;
 }
 
 // Add element as an exception so its width will not be included
@@ -18,10 +25,25 @@ Horizon.prototype.add_exception = function(exception) {
     this.exceptions[this.exceptions.length] = exception;
 }
 
+// Turn on or off mobile width calculation for responsiveness
+Horizon.prototype.set_mobile = function(state) {
+    if(typeof(state) === 'undefined')
+        mobile = false;
+    
+    this.mobile_state = state;
+}
+
 // Calculate and set container width
-Horizon.prototype.calc_width = function() {
+Horizon.prototype.calc_width = function(mobile) {
     var children = this.container.children;
     var skip;
+    var vw_width = document.documentElement.clientWidth;
+
+    if(typeof(mobile) !== 'undefined')
+        this.mobile_state = mobile;
+
+    if((vw_width <= this.mobile_bp) && this.mobile_state)
+        return;
     
     // Loop through elements and handle exceptions
     for(var i = 0; i < children.length; i++) {
@@ -39,5 +61,5 @@ Horizon.prototype.calc_width = function() {
         this.container_width += children[i].offsetWidth;
     }
 
-    this.container.style.width = (this.container_width / document.documentElement.clientWidth) * 100 + "%";
+    this.container.style.width = (this.container_width / vw_width) * 100 + "%";
 }
