@@ -7,7 +7,7 @@ JSHorizon is a tiny library written in pure Javascript to assist you in creating
 The problem with creating horizontal websites is that all of the browsers are predefined to automatically autowrap every element to a new row as soon as they hit the right corner of the viewport. It is neither very flexible nor easy to calculate and hardcode the page width yourself, since you need to do this for every element you add. With JSHorizon this is taken care of for you and you can add elements freely, without having to think about manipulating any page values.
 
 ## How does it work?
-JSHorizon uses a simple algorithm to calculate the width of all elements contained inside of the container of your choosing. Using the calculated width of the elements and the viewport width, a ratio is determined and used to set the correct page width.
+JSHorizon uses a simple algorithm to calculate the width of all elements contained inside of the container of your choosing. Using the calculated width of the elements a page width is determined.
 
 ## How do I use it?
 

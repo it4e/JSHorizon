@@ -8,6 +8,7 @@
 
 // Horizontal object
 var Horizon = function(container) {
+    this.vw_width = document.documentElement.clientWidth;
     this.container = container;
     this.container_width = 0;
     this.exceptions = new Array();
@@ -36,13 +37,12 @@ Horizon.prototype.set_mobile = function(state) {
 // Calculate and set container width
 Horizon.prototype.calc_width = function(mobile) {
     var children = this.container.children;
-    var skip;
-    var vw_width = document.documentElement.clientWidth;
+    var skip; 
 
     if(typeof(mobile) !== 'undefined')
         this.mobile_state = mobile;
 
-    if((vw_width <= this.mobile_bp) && this.mobile_state)
+    if((this.vw_width <= this.mobile_bp) && this.mobile_state)
         return;
     
     // Loop through elements and handle exceptions
@@ -61,5 +61,5 @@ Horizon.prototype.calc_width = function(mobile) {
         this.container_width += children[i].offsetWidth;
     }
 
-    this.container.style.width = (this.container_width / vw_width) * 100 + "%";
+    this.container.style.width = this.container_width + 'px';
 }
