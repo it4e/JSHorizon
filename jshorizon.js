@@ -26,6 +26,14 @@ Horizon.prototype.add_exception = function(exception) {
     this.exceptions[this.exceptions.length] = exception;
 }
 
+// Check if device is mobile
+Horizon.prototype.is_mobile = function() {
+    if(this.vw_width <= this.mobile_bp)
+        return true;
+
+    return false;
+}
+
 // Turn on or off mobile width calculation for responsiveness
 Horizon.prototype.set_mobile = function(state) {
     if(typeof(state) === 'undefined')
@@ -42,7 +50,7 @@ Horizon.prototype.calc_width = function(mobile) {
     if(typeof(mobile) !== 'undefined')
         this.mobile_state = mobile;
 
-    if((this.vw_width <= this.mobile_bp) && this.mobile_state)
+    if(this.is_mobile() && this.mobile_state)
         return;
     
     // Loop through elements and handle exceptions
