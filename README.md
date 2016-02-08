@@ -91,9 +91,9 @@ horizontal.calc_width(true);
 - *Horizon.set_resize(state)* : set whether to resize width on window resize. state = true | false. Standard is true
 - *Horizon.calc_width(mobile)* : calculate and set container width, mobile = set mobile width calculation = true | false.
 
-### Examples
+## Examples
 
-## Live demo
+### Live demo
 
 https://jsfiddle.net/pqf8v9cd/
 
