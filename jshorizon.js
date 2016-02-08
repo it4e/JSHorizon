@@ -54,7 +54,9 @@ Horizon.prototype.set_resize = function(state) {
 Horizon.prototype.resize = function() {
     if(this.resize_state) {
         this.resize_state = false;
+        
         var h = new Horizon(this.container);
+        h.set_resize(false);
 
         window.addEventListener("resize", function() {
             h.calc_width();
@@ -87,7 +89,7 @@ Horizon.prototype.calc_width = function(mobile) {
             continue;
         }
 
-        container_width += parseFloat(getComputedStyle(children[i], null).getPropertyValue("width").slice(0, -2));
+        container_width += children[i].offsetWidth;
     }
 
     this.container.style.width = container_width + 'px';

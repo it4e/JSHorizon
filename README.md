@@ -86,12 +86,16 @@ horizontal.calc_width(true);
 
 - *Horizon.set_mobile_breakpoint(breakpoint)* : set custom mobile breakpoint, standard = 768(px).
 - *Horizon.add_exception(element)* : add element as an exception so its width will not be included.
-- *Horizon.is_mobile()* : true if device is mobile, false if not.
-- *Horizon.set_mobile(state)* : turn on or off mobile width calculation.
-- *Horizon.set_resize(state)* : set whether to resize width on window resize.
-- *Horizon.calc_width(mobile)* : calculate and set container width, mobile = set mobile width calculation
+- *Horizon.is_mobile()* : returns true if device is mobile, false if not.
+- *Horizon.set_mobile(state)* : turn on or off mobile width calculation. state = true | false.
+- *Horizon.set_resize(state)* : set whether to resize width on window resize. state = true | false. Standard is true
+- *Horizon.calc_width(mobile)* : calculate and set container width, mobile = set mobile width calculation = true | false.
 
 ### Examples
+
+## Live demo
+
+https://jsfiddle.net/pqf8v9cd/
 
 index.html - Note that we are using the unit vw in the CSS code (http://www.w3schools.com/cssref/css_units.asp)
 
@@ -104,8 +108,8 @@ index.html - Note that we are using the unit vw in the CSS code (http://www.w3sc
         <style type="text/css">
           html, body {margin: 0; padding: 0; height: 100%;}
           * {box-sizing: border-box;}
-          header {width: 20vw; height: 100%; padding-top: 20%; position: absolute; top: 0;}
-          section {width: 100vw; height: 100%; float: left;}
+          header {width: 20vw; height: 100%; padding-top: 5%; position: absolute; top: 0; color: #FFF;}
+          section {width: 100vw; height: 100%; float: left; text-align: center;}
         </style>
         <script src="jshorizon.js"></script>
    </head>
