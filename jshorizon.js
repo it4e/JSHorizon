@@ -10,10 +10,10 @@
 var Horizon = function(container) {
     this.vw_width = document.documentElement.clientWidth;
     this.container = container;
-    this.container_width = 0;
     this.exceptions = new Array();
     this.mobile_bp = 768;
     this.mobile_state = false;
+    this.resize_state = true;
 }
 
 // Set custom mobile breakpoint for responsiveness, standard = 768
@@ -37,14 +37,35 @@ Horizon.prototype.is_mobile = function() {
 // Turn on or off mobile width calculation for responsiveness
 Horizon.prototype.set_mobile = function(state) {
     if(typeof(state) === 'undefined')
-        mobile = false;
-    
-    this.mobile_state = state;
+        this.mobile_state = false;
+    else
+        this.mobile_state = state;
+}
+
+// Set whether to resize width on window resize
+Horizon.prototype.set_resize = function(state) {
+    if(typeof(state) === 'undefined')
+        this.resize_state = false;
+    else
+        this.resize_state = state;
+}
+
+// Automatic resizing of width
+Horizon.prototype.resize = function() {
+    if(this.resize_state) {
+        this.resize_state = false;
+        var h = new Horizon(this.container);
+
+        window.addEventListener("resize", function() {
+            h.calc_width();
+        });
+    }
 }
 
 // Calculate and set container width
 Horizon.prototype.calc_width = function(mobile) {
     var children = this.container.children;
+    var container_width = 0;
     var skip; 
 
     if(typeof(mobile) !== 'undefined')
@@ -66,8 +87,9 @@ Horizon.prototype.calc_width = function(mobile) {
             continue;
         }
 
-        this.container_width += children[i].offsetWidth;
+        container_width += parseFloat(getComputedStyle(children[i], null).getPropertyValue("width").slice(0, -2));
     }
 
-    this.container.style.width = this.container_width + 'px';
+    this.container.style.width = container_width + 'px';
+    this.resize();
 }
