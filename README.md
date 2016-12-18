@@ -27,7 +27,7 @@ var container = document.getElementByTagName("BODY")[0];
 var horizontal = new Horizon(container);
 ```
 
-To automatically calculate the width of the page you shall use the '*Horizon.calc_width(mobile = false)*' function, taking a single argument whether to call of the calculation if the device is mobile-size.
+To automatically calculate the width of the page you shall use the '*Horizon.calc_width(mobile = false)*' function, taking a single argument whether to call off the calculation if the device is mobile-size.
 
 ```javascript
 var horizontal = new Horizon(container);
